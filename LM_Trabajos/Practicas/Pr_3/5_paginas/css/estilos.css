@@ -1,0 +1,64 @@
+body {
+    margin: 0 auto;
+    background-image: url('fondo.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    text-align: center;
+    width: 80%;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    background-color: #0fa1a1;
+    color: white;
+    border-left: 5px solid #0fa1a1;
+    padding: 10px;
+    margin: 20px 0;
+}
+
+.container {
+  display: flex;
+}
+
+.container div {
+  background-color: #f1f1f1;
+  margin: 10px;
+  padding: 20px;
+  font-size: 30px;
+}
+
+img {
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px gray;
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    margin: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+    display: flex;
+}
+
+li {
+    border: 1px solid #74cf1e;
+    display: inline;
+    padding: 8px 15px;
+    margin: 0 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+a {
+    text-decoration: none;
+    color: #138b6d;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #00d9ff;
+}

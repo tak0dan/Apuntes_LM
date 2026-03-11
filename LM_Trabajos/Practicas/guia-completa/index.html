@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Completa: Flexbox, Float, Formularios y más</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="nav-back">
+        <a href="../../index.html">← Volver a Prácticas</a>
+        <span style="color: var(--muted);">Guía Completa</span>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Guía Completa de Desarrollo Web</h1>
+            <p class="subtitle">Flexbox, Float, Formularios, HTML, CSS y Gráficos</p>
+        </header>
+
+        <div class="table-of-contents">
+            <h2>📑 Tabla de Contenidos</h2>
+            <ul class="toc-list">
+                <li><a href="#conceptos-html-css">1. Conceptos Fundamentales: HTML y CSS</a></li>
+                <li><a href="#flexbox">2. Flexbox: Layouts Modernos</a></li>
+                <li><a href="#float">3. Float: El Antiguo Sistema</a></li>
+                <li><a href="#formularios">4. Formularios HTML</a></li>
+                <li><a href="#graficos">5. Gráficos y Visualización de Datos</a></li>
+                <li><a href="#material-extendido">6. Material Extendido (ZIP + Examen)</a></li>
+                <li><a href="#errores-sutiles">7. Errores Sutiles y Estructura</a></li>
+                <li><a href="#referencias">8. Referencias a tus Proyectos</a></li>
+            </ul>
+        </div>
+
+        <!-- HTML y CSS -->
+        <section id="conceptos-html-css">
+            <h2>📚 1. Conceptos Fundamentales: HTML y CSS</h2>
+
+            <h3>¿Qué es HTML?</h3>
+            <p>HTML (HyperText Markup Language) es el lenguaje de marcado que estructura el contenido de una página web. Define qué elementos hay en la página mediante etiquetas.</p>
+
+            <h4>Estructura Básica de HTML</h4>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Mi Página&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Contenido aquí&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+            <div class="concept-box">
+                <strong>Elemento:</strong> Es la unidad básica de HTML. Consiste en una etiqueta de apertura, contenido y etiqueta de cierre: <code>&lt;etiqueta&gt;contenido&lt;/etiqueta&gt;</code>
+            </div>
+
+            <h4>Elementos Importantes</h4>
+            <ul>
+                <li><code>&lt;div&gt;</code> - Contenedor genérico para agrupar elementos</li>
+                <li><code>&lt;span&gt;</code> - Contenedor inline para texto</li>
+                <li><code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code> - Elementos semánticos</li>
+                <li><code>&lt;section&gt;</code> - Define secciones temáticas</li>
+                <li><code>&lt;article&gt;</code> - Contenido independiente</li>
+                <li><code>&lt;nav&gt;</code> - Navegación</li>
+            </ul>
+
+                        <h3>Listas HTML: ul, ol y li (profundidad de examen)</h3>
+                        <p>Las listas no son "solo bullets". Son estructura semantica y afectan accesibilidad, selectores y layout.</p>
+                        <pre><code>&lt;ul&gt;
+    &lt;li&gt;Elemento sin orden&lt;/li&gt;
+    &lt;li&gt;Elemento sin orden&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+    &lt;li&gt;Paso 1&lt;/li&gt;
+    &lt;li&gt;Paso 2&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+                        <div class="concept-box">
+                                <strong>Matiz clave:</strong> <code>li</code> debe vivir dentro de <code>ul</code> o <code>ol</code>. Si lo sacas fuera, rompes semantica y algunos selectores como <code>ul &gt; li:last-child</code> dejan de funcionar como esperas.
+                        </div>
+                        <pre><code>/* Menu tipico con separadores */
+.menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li:not(:last-child) {
+    border-right: 2px solid red;
+}</code></pre>
+
+                        <h3>Tablas HTML: estructura correcta y errores sutiles</h3>
+                        <p>En tareas academicas, un <code>table</code> mal estructurado se detecta rapido aunque "se vea bien". Prioriza estructura correcta antes de estilo.</p>
+                        <pre><code>&lt;table&gt;
+    &lt;caption&gt;Notas&lt;/caption&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Alumno&lt;/th&gt;
+            &lt;th&gt;Nota&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Nikita&lt;/td&gt;
+            &lt;td&gt;9&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+                        <ul>
+                                <li>Usa <code>th</code> para cabeceras, no <code>td</code>.</li>
+                                <li>Evita tablas para maquetar toda la pagina salvo que el ejercicio lo pida explicitamente.</li>
+                                <li>Si el enunciado pide "exactamente como la muestra", respeta orden de filas/columnas y agrupaciones.</li>
+                        </ul>
+
+            <h3>¿Qué es CSS?</h3>
+            <p>CSS (Cascading Style Sheets) es el lenguaje que define la apariencia y disposición de los elementos HTML. Controla colores, tamaños, espacios, posiciones, etc.</p>
+
+            <h4>Formas de Aplicar CSS</h4>
+            <pre><code>/* 1. CSS Inline (dentro del HTML) */
+&lt;h1 style="color: blue;"&gt;Título&lt;/h1&gt;
+
+/* 2. CSS Interno (en &lt;style&gt;) */
+&lt;style&gt;
+  h1 { color: blue; }
+&lt;/style&gt;
+
+/* 3. CSS Externo (archivo .css) */
+&lt;link rel="stylesheet" href="estilos.css"&gt;</code></pre>
+
+            <div class="concept-box">
+                <strong>La Cascada de CSS:</strong> Los estilos se aplican en orden. El CSS externo es sobrescrito por el interno, que es sobrescrito por el inline. Los estilos más específicos sobrescriben los generales.
+            </div>
+
+            <h4>Selectores de CSS</h4>
+            <pre><code>/* Selectores básicos */
+h1 { }              /* Elemento */
+.clase { }          /* Clase */
+#id { }             /* ID */
+div.clase { }       /* Elemento con clase */
+h1, h2, h3 { }      /* Múltiples selectores */
+
+/* Selectores descendentes y hijos */
+div p { }           /* Párrafos dentro de div */
+div > p { }         /* Párrafos hijos directos de div */
+
+/* Pseudoclases */
+a:hover { }         /* Cuando el ratón está sobre el elemento */
+button:active { }   /* Mientras se hace clic */
+input:focus { }     /* Cuando tiene el foco */</code></pre>
+
+            <h4>Propiedades CSS Esenciales</h4>
+            <pre><code>/* Dimensiones */
+width: 100px;
+height: 200px;
+max-width: 500px;
+min-height: 100px;
+
+/* Espacios */
+margin: 20px;           /* Espacio FUERA del elemento */
+padding: 15px;          /* Espacio DENTRO del elemento */
+border: 2px solid #000; /* Borde */
+
+/* Colores y Textos */
+color: #ffffff;         /* Color del texto */
+background-color: blue; /* Color de fondo */
+font-size: 16px;
+font-weight: 600;
+text-align: center;
+
+/* Posicionamiento (sin flexbox ni grid) */
+position: relative;     /* Relativo a su posición normal */
+position: absolute;     /* Relativo al padre posicionado */
+position: fixed;        /* Relativo a la ventana */
+top: 10px;
+left: 20px;</code></pre>
+
+            <h3>El Modelo de Caja (Box Model)</h3>
+            <p>Todo elemento en HTML es una caja rectangular. Entender el modelo de caja es fundamental:</p>
+
+            <div class="demo-container">
+                <div style="background: rgba(122, 209, 162, 0.3); border: 2px dashed var(--primary); padding: 20px; text-align: center; width: 200px;">
+                    <div style="background: var(--primary); color: #000; padding: 10px; margin: 10px; border: 2px solid var(--accent); text-align: center; font-size: 0.9em;">
+                        <div>content</div>
+                        <div style="font-size: 0.8em; color: rgba(0,0,0,0.7);">padding</div>
+                    </div>
+                    <div style="font-size: 0.8em; color: var(--primary); margin-top: 5px;">border</div>
+                    <div style="font-size: 0.8em; color: var(--primary); margin-top: 5px;">margin</div>
+                </div>
+            </div>
+
+            <pre><code>/* De adentro hacia afuera:
+   1. content (contenido real)
+   2. padding (espacio interno)
+   3. border (borde)
+   4. margin (espacio externo)
+*/
+
+.box {
+  width: 200px;           /* Ancho del contenido */
+  padding: 15px;          /* 15px de espacio interno */
+  border: 2px solid;      /* Borde de 2px */
+  margin: 20px;           /* 20px de espacio externo */
+  
+  /* El box-sizing controla si el ancho incluye padding/border */
+  box-sizing: border-box; /* Recomendado: ancho incluye padding y border */
+}</code></pre>
+
+            <div class="warning-box">
+                <strong>⚠️ Importante:</strong> Por defecto, <code>box-sizing: content-box</code> hace que <code>width</code> sea solo el contenido. Es mejor usar <code>box-sizing: border-box</code> en todos los elementos (muchos developers lo hacen con <code>* { box-sizing: border-box; }</code>).
+            </div>
+
+        </section>
+
+        <!-- Flexbox -->
+        <section id="flexbox">
+            <h2>🎯 2. Flexbox: Layouts Modernos</h2>
+
+            <p>Flexbox (Flexible Box Layout) es el sistema moderno para crear layouts. Es más flexible y potente que float, y es el método recomendado hoy en día.</p>
+
+            <h3>Conceptos Clave de Flexbox</h3>
+
+            <h4>Contenedor Flex vs Items Flex</h4>
+            <div class="concept-box">
+                <strong>Contenedor Flex:</strong> El elemento padre que tiene <code>display: flex</code>. Define cómo se distribuyen los elementos hijos (items).
+                <br><strong>Items Flex:</strong> Los elementos hijos directos del contenedor. Se distribuyen según las propiedades del contenedor.
+            </div>
+
+            <h4>Propiedad: display: flex</h4>
+            <pre><code>/* Convertir un elemento en contenedor flex */
+.container {
+  display: flex;
+  /* Ahora los hijos se distribuyen horizontalmente */
+}</code></pre>
+
+            <div class="reference">
+                <strong>📌 En tus proyectos:</strong> Lo usaste en <code>index.html</code> (línea 43) para centrar contenido, y en <code>Pr_3/5_paginas/css/estilos.css</code> para crear layouts.
+            </div>
+
+            <h3>Propiedades del Contenedor Flex</h3>
+
+            <h4>flex-direction</h4>
+            <p>Define la dirección en que se distribuyen los items (eje principal).</p>
+            <pre><code>.container {
+  display: flex;
+  flex-direction: row;        /* Horizontal (por defecto) */
+  /* flex-direction: column;   */ /* Vertical */
+  /* flex-direction: row-reverse; */ /* Horizontal invertido */
+  /* flex-direction: column-reverse; */ /* Vertical invertido */
+}</code></pre>
+
+            <p><strong>Demo:</strong></p>
+            <div class="demo-container" style="flex-direction: row; margin-bottom: 20px;">
+                <div class="demo-item" style="flex: 1;">Item 1</div>
+                <div class="demo-item" style="flex: 1;">Item 2</div>
+                <div class="demo-item" style="flex: 1;">Item 3</div>
+            </div>
+
+            <h4>justify-content</h4>
+            <p>Distribuye los items a lo largo del eje principal (horizontalmente si flex-direction: row).</p>
+            <pre><code>.container {
+  display: flex;
+  justify-content: flex-start;    /* Pegados al inicio (defecto) */
+  /* justify-content: center; */     /* Centrados */
+  /* justify-content: flex-end; */   /* Pegados al final */
+  /* justify-content: space-between; */ /* Espacio uniforme entre items */
+  /* justify-content: space-around; */ /* Espacio uniforme alrededor */
+  /* justify-content: space-evenly; */ /* Espacio completamente uniforme */
+}</code></pre>
+
+            <p><strong>Demo - space-between:</strong></p>
+            <div class="demo-container flex-demo-justify">
+                <div class="demo-item">Item 1</div>
+                <div class="demo-item">Item 2</div>
+                <div class="demo-item">Item 3</div>
+            </div>
+
+            <h4>align-items</h4>
+            <p>Distribuye los items a lo largo del eje secundario (verticalmente si flex-direction: row).</p>
+            <pre><code>.container {
+  display: flex;
+  height: 200px;
+  align-items: flex-start;    /* Pegados arriba */
+  /* align-items: center; */     /* Centrados verticalmente */
+  /* align-items: flex-end; */   /* Pegados abajo */
+  /* align-items: stretch; */    /* Se expanden para llenar (defecto) */
+  /* align-items: baseline; */   /* Alineados por baseline del texto */
+}</code></pre>
+
+            <p><strong>Demo - center:</strong></p>
+            <div class="demo-container flex-demo-align">
+                <div class="demo-item">Item 1</div>
+                <div class="demo-item">Item 2</div>
+                <div class="demo-item">Item 3</div>
+            </div>
+
+            <div class="reference">
+                <strong>📌 En tus proyectos:</strong> Usaste <code>align-items: center</code> en tu main index.html (línea 43) para centrar verticalmente.
+            </div>
+
+            <h4>flex-wrap</h4>
+            <p>Controla si los items se envuelven a la siguiente línea o se comprimen.</p>
+            <pre><code>.container {
+  display: flex;
+  flex-wrap: nowrap;    /* No envuelve, comprime los items (defecto) */
+  /* flex-wrap: wrap; */       /* Envuelve a la siguiente línea */
+  /* flex-wrap: wrap-reverse; */ /* Envuelve pero invierte el orden */
+}</code></pre>
+
+            <p><strong>Demo - wrap:</strong></p>
+            <div class="demo-container flex-demo-wrap">
+                <div class="demo-item">Item 1</div>
+                <div class="demo-item">Item 2</div>
+                <div class="demo-item">Item 3</div>
+                <div class="demo-item">Item 4</div>
+                <div class="demo-item">Item 5</div>
+            </div>
+
+            <h4>gap</h4>
+            <p>Define el espacio entre items (mucho más simple que usar margin).</p>
+            <pre><code>.container {
+  display: flex;
+  gap: 16px;  /* Espacio de 16px entre todos los items */
+  
+  /* O controlar por separado */
+  row-gap: 16px;    /* Espacio vertical */
+  column-gap: 12px; /* Espacio horizontal */
+}</code></pre>
+
+            <h3>Propiedades de los Items Flex</h3>
+
+            <h4>flex (propiedad abreviada)</h4>
+            <p>Controla cómo se distribuye el espacio disponible entre items.</p>
+            <pre><code>.item {
+  flex: 1;  /* Crece para ocupar espacio disponible (proporción 1) */
+}
+
+/* Equivalente a: */
+flex-grow: 1;      /* Cuánto crece si hay espacio extra */
+flex-shrink: 1;    /* Cuánto se encoge si hay poco espacio */
+flex-basis: auto;  /* Tamaño base antes de crecer/encogerse */</code></pre>
+
+            <div class="concept-box">
+                <strong>Ejemplo práctico:</strong>
+                <pre><code>.container { display: flex; }
+.item-1 { flex: 1; }   /* Ocupa 1/3 del espacio */
+.item-2 { flex: 2; }   /* Ocupa 2/3 del espacio */
+.item-3 { flex: 1; }   /* Ocupa 1/3 del espacio */
+/* Total: 1+2+1 = 4 partes */</code></pre>
+            </div>
+
+            <h4>align-self</h4>
+            <p>Alinea un item específico diferente a los demás.</p>
+            <pre><code>.item-especial {
+  align-self: center;   /* Este item se centra verticalmente */
+  align-self: flex-end; /* Este item va al final */
+}</code></pre>
+
+            <h4>order</h4>
+            <p>Cambia el orden visual de los items sin cambiar el HTML.</p>
+            <pre><code>.item-1 { order: 3; }  /* Aparece tercero */
+.item-2 { order: 1; }  /* Aparece primero */
+.item-3 { order: 2; }  /* Aparece segundo */</code></pre>
+
+            <h3>Nuances Profundas de Flexbox</h3>
+
+            <h4>1. El Eje Principal vs Eje Secundario</h4>
+            <p>Flexbox opera sobre dos ejes:</p>
+            <ul>
+                <li><strong>Eje Principal:</strong> Definido por <code>flex-direction</code>. Si es <code>row</code>, es horizontal.</li>
+                <li><strong>Eje Secundario (Cross Axis):</strong> Perpendicular al principal. Si el principal es horizontal, este es vertical.</li>
+            </ul>
+            <pre><code>/* Si flex-direction: row (horizontal) */
+justify-content: ...;  /* Distribuye en EJE PRINCIPAL (horizontal) */
+align-items: ...;      /* Distribuye en EJE SECUNDARIO (vertical) */
+
+/* Si flex-direction: column (vertical) */
+justify-content: ...;  /* Distribuye en EJE PRINCIPAL (vertical) */
+align-items: ...;      /* Distribuye en EJE SECUNDARIO (horizontal) */</code></pre>
+
+            <h4>2. min-width y min-content</h4>
+            <p>Los items flex no se comprimen por debajo de su <code>min-width</code>. Esto es importante para evitar que el contenido se rompa.</p>
+            <pre><code>.container {
+  display: flex;
+  width: 300px;
+  overflow: hidden; /* Evita que rebase */
+}
+
+.item {
+  flex: 1;
+  min-width: 100px;  /* No se comprimirá menos de 100px */
+  /* Si el contenido es más ancho, rebasará */
+}</code></pre>
+
+            <h4>3. Diferencia entre flex-basis y width</h4>
+            <pre><code>.item {
+  width: 100px;        /* Tamaño fijo, pero flex lo puede cambiar */
+  flex-basis: 100px;   /* Tamaño "base" antes de flexionar */
+  flex: 1;             /* Crece si hay espacio */
+}
+
+/* Con flex, el width se ignora (flex-basis tiene precedencia) */</code></pre>
+
+            <h4>4. Collapsing Margins NO ocurre en Flexbox</h4>
+            <p>En HTML normal, márgenes verticales se colapsan (toman el valor mayor). En flexbox, NO ocurre:</p>
+            <pre><code>/* En display: block */
+.item1 { margin-bottom: 20px; }
+.item2 { margin-top: 30px; }
+/* El espacio es 30px (solo el mayor) */
+
+/* En display: flex */
+.container { display: flex; flex-direction: column; }
+.item1 { margin-bottom: 20px; }
+.item2 { margin-top: 30px; }
+/* El espacio es 50px (20px + 30px, no colapsa) */</code></pre>
+
+            <h4>5. Espacios Negativos (Negative Space)</h4>
+            <pre><code>.container {
+  display: flex;
+  gap: 16px;
+}
+
+.item {
+  flex: 1;
+  margin: -10px;  /* Márgenes negativos reducen el espacio */
+}</code></pre>
+
+        </section>
+
+        <!-- Float -->
+        <section id="float">
+            <h2>🌊 3. Float: El Antiguo Sistema</h2>
+
+            <p>Float es el sistema antiguo de layouts (pre-flexbox). Aunque obsoleto para layouts principales, es importante entenderlo porque:</p>
+            <ul>
+                <li>Aún existe en código heredado</li>
+                <li>Es útil para envolver texto alrededor de imágenes</li>
+                <li>Puede ser más eficiente en algunos casos</li>
+            </ul>
+
+            <div class="reference">
+                <strong>📌 En tus proyectos:</strong> Usaste float en <code>images/css/style.css</code> (líneas 48-56): <code>.content { float: left; width: 88%; }</code> y <code>.sidebar { float: right; width: 10%; }</code>, y en <code>practica5.1</code> con <code>#imageLeft { float: left; }</code> y <code>#imageRight { float: right; }</code>.
+            </div>
+
+            <h3>¿Cómo Funciona Float?</h3>
+            <p>Float saca un elemento del flujo normal y lo coloca a un lado (izquierda o derecha), permitiendo que otros elementos fluyan alrededor de él.</p>
+
+            <pre><code>/* Valores posibles */
+.element {
+  float: left;    /* Se desplaza a la izquierda */
+  float: right;   /* Se desplaza a la derecha */
+  float: none;    /* No flota (valor por defecto) */
+}</code></pre>
+
+            <h4>Demo: Float Left</h4>
+            <div class="demo-container" style="flex-direction: column; align-items: stretch; min-height: auto;">
+                <div class="float-left-demo">
+                    Contenido flotante a la izquierda
+                </div>
+                <div style="text-align: justify;">
+                    Este es el texto normal que fluye alrededor del elemento flotante. Cuando un elemento tiene <code>float: left</code>, se sale del flujo normal y los elementos siguientes lo rodean.
+                </div>
+            </div>
+
+            <h4>Demo: Float Right</h4>
+            <div class="demo-container" style="flex-direction: column; align-items: stretch; min-height: auto;">
+                <div class="float-right-demo">
+                    Contenido flotante a la derecha
+                </div>
+                <div style="text-align: justify;">
+                    Similar al anterior, pero ahora el elemento está a la derecha. El texto fluye alrededor de él desde la izquierda.
+                </div>
+                <div class="clear-demo"></div>
+            </div>
+
+            <h3>Propiedad: clear</h3>
+            <p><code>clear</code> evita que un elemento tenga elementos flotantes a su lado.</p>
+            <pre><code>.no-float {
+  clear: left;    /* No permite flotantes a la izquierda */
+  clear: right;   /* No permite flotantes a la derecha */
+  clear: both;    /* No permite flotantes a ningún lado */
+  clear: none;    /* Valor por defecto */
+}</code></pre>
+
+            <div class="concept-box">
+                <strong>Caso de uso:</strong> Si tienes un <code>&lt;footer&gt;</code> después de elementos flotantes, necesitas <code>clear: both</code> para que no fluya alrededor del contenido flotante.
+            </div>
+
+            <h3>Problema: Collapse del Contenedor</h3>
+            <p>Cuando todos los hijos de un contenedor están flotantes, el contenedor colapsa a altura 0. Soluciones:</p>
+
+            <pre><code>/* Solución 1: overflow */
+.container {
+  overflow: hidden;  /* o auto */
+  /* Esto "contiene" los elementos flotantes */
+}
+
+/* Solución 2: Clearfix (recomendado) */
+.container::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Solución 3: Hacer uso de display: flow-root */
+.container {
+  display: flow-root;  /* Solución moderna y limpia */
+}</code></pre>
+
+            <h3>Nuances Profundas de Float</h3>
+
+            <h4>1. Elementos Flotantes No Respetan margin-collapse</h4>
+            <p>Los márgenes verticales de elementos flotantes no colapsan (como en flexbox):</p>
+            <pre><code>.float-left { 
+  float: left; 
+  margin-bottom: 20px;
+}
+.float-left { 
+  margin-top: 30px; 
+}
+/* El espacio es 50px, no 30px */</code></pre>
+
+            <h4>2. Elementos Flotantes No Crean un Contexto de Apilamiento (Stacking Context)</h4>
+            <p>Pero esto ha sido debilitado. Z-index puede funcionar de manera impredecible.</p>
+
+            <h4>3. Float y Text-align</h4>
+            <pre><code>/* text-align NO afecta a elementos flotantes */
+.container {
+  text-align: center;
+}
+
+.container > img {
+  float: left;  /* La imagen seguirá en la izquierda, no se alinea al centro */
+}</code></pre>
+
+            <h4>4. Ancho 100% de Floats</h4>
+            <pre><code>/* Problema: ancho 100% con floats crea overflow */
+.container {
+  width: 400px;
+}
+
+.left {
+  float: left;
+  width: 50%;   /* 200px */
+}
+
+.right {
+  float: left;
+  width: 50%;   /* 200px */
+  /* Total: 400px ✓ Funciona */
+}
+
+/* PERO si añades bordes o padding, rebasan */
+.left {
+  float: left;
+  width: 50%;
+  border: 1px solid;  /* +2px por el borde */
+  /* Total: 402px ✗ Problema */
+}</code></pre>
+
+            <h4>5. Float No Trabaja con Altura (Height)</h4>
+            <pre><code>/* height EN ELEMENTOS FLOTANTES es complicado */
+.sidebar {
+  float: right;
+  width: 30%;
+  height: 100%;  /* ✗ NO hace lo que esperas */
+  /* Para altura 100%, necesitas height del padre */
+}
+
+.container {
+  height: 500px;
+}
+
+.sidebar {
+  float: right;
+  width: 30%;
+  height: 100%; /* ✓ Ahora y si, es 500px */
+}</code></pre>
+
+            <h4>6. Diferencia entre width % y width px</h4>
+            <pre><code>/* Con floats, el % es relativo al padre */
+.container { width: 600px; }
+.sidebar { float: right; width: 50%; }  /* 300px */
+
+/* Con width px, es directo */
+.sidebar { float: right; width: 300px; }</code></pre>
+
+        </section>
+
+        <!-- Formularios -->
+        <section id="formularios">
+            <h2>📋 4. Formularios HTML</h2>
+
+            <p>Los formularios son esenciales para recopilar datos del usuario. HTML proporciona muchos elementos de formulario.</p>
+
+            <div class="reference">
+                <strong>📌 En tus proyectos:</strong> Tienes una práctica completa en <code>Practica_formulario/formulario.html</code> con inputs, textareas, radio buttons, checkboxes y selects.
+            </div>
+
+            <h3>Elemento: &lt;form&gt;</h3>
+            <p>Contenedor que agrupa campos de formulario. Permite enviar datos a un servidor.</p>
+            <pre><code>&lt;form action="procesar.php" method="POST"&gt;
+  &lt;!-- Campos del formulario aquí --&gt;
+  &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;
+
+/* Atributos importantes */
+action       /* URL a donde se envían los datos */
+method       /* GET o POST (cómo se envían) */
+name         /* Nombre del formulario */
+target       /* Dónde abrir la respuesta (_blank, _self, etc.) */</code></pre>
+
+                        <h4>Estructura de forma/formulario exacta (tipo examen)</h4>
+                        <p>Cuando piden "formulario de datos" como plantilla fija, el orden estructural suele evaluarse: primero fieldsets principales, luego agrupaciones secundarias, luego acciones.</p>
+                        <pre><code>&lt;form&gt;
+    &lt;fieldset&gt;...datos personales...&lt;/fieldset&gt;
+    &lt;fieldset&gt;...idioma...&lt;/fieldset&gt;
+    &lt;fieldset&gt;...programas...&lt;/fieldset&gt;
+    &lt;fieldset&gt;...sistema operativo...&lt;/fieldset&gt;
+    &lt;input type="reset"&gt;
+&lt;/form&gt;</code></pre>
+                        <p>Un cambio de orden o mover inputs fuera del fieldset puede invalidar la correccion aunque el estilo sea parecido.</p>
+
+            <h4>GET vs POST</h4>
+            <table style="width: 100%; border-collapse: collapse; margin: 12px 0;">
+                <tr style="background: rgba(122, 209, 162, 0.1);">
+                    <td style="padding: 8px; border: 1px solid rgba(122, 209, 162, 0.3);"><strong>GET</strong></td>
+                    <td style="padding: 8px; border: 1px solid rgba(122, 209, 162, 0.3);">Datos en la URL. Visible. Limitación de tamaño. Inseguro para datos sensibles.</td>
+                </tr>
+                <tr style="background: rgba(255, 106, 0, 0.05);">
+                    <td style="padding: 8px; border: 1px solid rgba(255, 106, 0, 0.2);"><strong>POST</strong></td>
+                    <td style="padding: 8px; border: 1px solid rgba(255, 106, 0, 0.2);">Datos en el cuerpo. Oculto. Sin límite de tamaño. Más seguro.</td>
+                </tr>
+            </table>
+
+            <h3>Elementos de Formulario</h3>
+
+            <h4>1. Input de Texto</h4>
+            <pre><code>&lt;label for="nombre"&gt;Nombre:&lt;/label&gt;
+&lt;input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required&gt;</code></pre>
+
+            <div class="form-group">
+                <label for="input-demo">Nombre:</label>
+                <input type="text" id="input-demo" placeholder="Tu nombre aquí">
+            </div>
+
+            <h4>2. Input de Email</h4>
+            <pre><code>&lt;label for="email"&gt;Email:&lt;/label&gt;
+&lt;input type="email" id="email" name="email" required&gt;</code></pre>
+
+            <div class="form-group">
+                <label for="email-demo">Email:</label>
+                <input type="email" id="email-demo" placeholder="tu@email.com">
+            </div>
+
+            <h4>3. Input de Contraseña</h4>
+            <pre><code>&lt;label for="pass"&gt;Contraseña:&lt;/label&gt;
+&lt;input type="password" id="pass" name="pass" required&gt;</code></pre>
+
+            <div class="form-group">
+                <label for="pass-demo">Contraseña:</label>
+                <input type="password" id="pass-demo" placeholder="••••••••">
+            </div>
+
+            <h4>4. Textarea (Texto Multilinea)</h4>
+            <pre><code>&lt;label for="comentarios"&gt;Comentarios:&lt;/label&gt;
+&lt;textarea id="comentarios" name="comentarios" rows="4" placeholder="Escribe aquí..."&gt;&lt;/textarea&gt;</code></pre>
+
+            <div class="form-group">
+                <label for="textarea-demo">Comentarios:</label>
+                <textarea id="textarea-demo" placeholder="Escribe tus comentarios aquí..."></textarea>
+            </div>
+
+                        <h4>Textfields con scroll (textarea scrollers)</h4>
+                        <p>Para textos largos, la tecnica clasica es fijar altura y activar scroll vertical. Esto aparece en practicas tipo tattoo/news cuando el texto debe quedarse dentro de una caja fija.</p>
+                        <pre><code>.text {
+    height: 100%;
+    overflow-y: auto;   /* Scroll vertical cuando excede */
+    overflow-x: hidden; /* Evita scroll horizontal feo */
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;   /* Permite agrandar solo en vertical */
+    overflow-y: auto;
+}</code></pre>
+                        <div class="warning-box">
+                                <strong>Error sutil comun:</strong> poner <code>overflow-y: auto</code> sin una altura concreta en el contenedor. Sin altura limite, no aparece scroll porque el bloque sigue creciendo.
+                        </div>
+
+            <h4>5. Radio Buttons (Una opción)</h4>
+            <pre><code>&lt;label&gt;Género:&lt;/label&gt;
+&lt;input type="radio" name="genero" value="masculino" id="m"&gt;
+&lt;label for="m"&gt;Masculino&lt;/label&gt;
+
+&lt;input type="radio" name="genero" value="femenino" id="f"&gt;
+&lt;label for="f"&gt;Femenino&lt;/label&gt;
+
+&lt;input type="radio" name="genero" value="otro" id="o"&gt;
+&lt;label for="o"&gt;Otro&lt;/label&gt;</code></pre>
+
+            <div class="form-group">
+                <label>Género:</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" name="genero" value="masculino" id="m">
+                        <label for="m">Masculino</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="genero" value="femenino" id="f">
+                        <label for="f">Femenino</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" name="genero" value="otro" id="o">
+                        <label for="o">Otro</label>
+                    </div>
+                </div>
+            </div>
+
+            <h4>6. Checkboxes (Múltiples Opciones)</h4>
+            <pre><code>&lt;label&gt;Intereses:&lt;/label&gt;
+&lt;input type="checkbox" name="deportes" value="futbol" id="futbol"&gt;
+&lt;label for="futbol"&gt;Fútbol&lt;/label&gt;
+
+&lt;input type="checkbox" name="deportes" value="basquet" id="basquet"&gt;
+&lt;label for="basquet"&gt;Basquetbol&lt;/label&gt;</code></pre>
+
+            <div class="form-group">
+                <label>Intereses:</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="intereses" value="deportes" id="deportes">
+                        <label for="deportes">Deportes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="intereses" value="musica" id="musica">
+                        <label for="musica">Música</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="intereses" value="lectura" id="lectura">
+                        <label for="lectura">Lectura</label>
+                    </div>
+                </div>
+            </div>
+
+            <h4>7. Select (Lista Desplegable)</h4>
+            <pre><code>&lt;label for="pais"&gt;País:&lt;/label&gt;
+&lt;select id="pais" name="pais"&gt;
+  &lt;option value=""&gt;Selecciona un país&lt;/option&gt;
+  &lt;option value="spain"&gt;España&lt;/option&gt;
+  &lt;option value="mexico"&gt;México&lt;/option&gt;
+  &lt;option value="argentina"&gt;Argentina&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+
+            <div class="form-group">
+                <label for="pais-demo">País:</label>
+                <select id="pais-demo">
+                    <option value="">Selecciona un país</option>
+                    <option value="spain">España</option>
+                    <option value="mexico">México</option>
+                    <option value="argentina">Argentina</option>
+                </select>
+            </div>
+
+            <h4>8. Fieldset y Legend</h4>
+            <p>Agrupan campos relacionados visualmente.</p>
+            <pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Datos Personales&lt;/legend&gt;
+  &lt;input type="text" placeholder="Nombre"&gt;
+  &lt;input type="email" placeholder="Email"&gt;
+&lt;/fieldset&gt;</code></pre>
+
+            <h3>Atributos Importantes</h3>
+            <table style="width: 100%; border-collapse: collapse; margin: 12px 0;">
+                <tr style="background: rgba(122, 209, 162, 0.1);">
+                    <td style="padding: 8px; border: 1px solid rgba(122, 209, 162, 0.3);"><code>required</code></td>
+                    <td style="padding: 8px; border: 1px solid rgba(122, 209, 162, 0.3);">Campo obligatorio</td>
+                </tr>
+                <tr style="background: rgba(255, 106, 0, 0.05);">
+                    <td style="padding: 8px; border: 1px solid rgba(255, 106, 0, 0.2);"><code>placeholder</code></td>
+                    <td style="padding: 8px; border: 1px solid rgba(255, 106, 0, 0.2);">Texto de ejemplo que desaparece al escribir</td>
+                </tr>
+                <tr style="background: rgba(122, 209, 162, 0.1);">
+                    <td style="padding: 8px; border: 1px solid rgba(122, 209, 162, 0.3);"><code>disabled</code></td>
+                    <td style="padding: 8px; border: 1px solid rgba(122, 209, 162, 0.3);">Campo deshabilitado (no se puede usar)</td>
+                </tr>
+                <tr style="background: rgba(255, 106, 0, 0.05);">
+                    <td style="padding: 8px; border: 1px solid rgba(255, 106, 0, 0.2);"><code>readonly</code></td>
+                    <td style="padding: 8px; border: 1px solid rgba(255, 106, 0, 0.2);">Campo de solo lectura (se ve pero no se puede editar)</td>
+                </tr>
+                <tr style="background: rgba(122, 209, 162, 0.1);">
+                    <td style="padding: 8px; border: 1px solid rgba(122, 209, 162, 0.3);"><code>maxlength</code></td>
+                    <td style="padding: 8px; border: 1px solid rgba(122, 209, 162, 0.3);">Número máximo de caracteres</td>
+                </tr>
+            </table>
+
+            <h3>Validación HTML5</h3>
+            <p>HTML5 proporciona validación integrada:</p>
+            <pre><code>&lt;input type="email" required&gt;    /* Valida que sea email */
+&lt;input type="number" min="1" max="100"&gt;  /* Solo números entre 1-100 */
+&lt;input type="date"&gt;                     /* Selector de fecha */
+&lt;input type="time"&gt;                     /* Selector de hora */
+&lt;input type="url"&gt;                      /* Valida URL */
+&lt;input type="tel"&gt;                      /* Números de teléfono */</code></pre>
+
+            <h3>Nuances de Formularios</h3>
+
+            <h4>1. El Atributo "for" de Label</h4>
+            <pre><code>/* CORRECTO: El "for" coincide con el "id" del input */
+&lt;label for="nombre"&gt;Nombre:&lt;/label&gt;
+&lt;input type="text" id="nombre"&gt;
+
+/* INCORRECTO: No coinciden */
+&lt;label for="nombre"&gt;Nombre:&lt;/label&gt;
+&lt;input type="text" id="nombre-input"&gt;</code></pre>
+
+            <h4>2. Radio Buttons: El Atributo "name"</h4>
+            <p>Todos los radio buttons que deben ser exclusivos deben tener el MISMO name:</p>
+            <pre><code>/* CORRECTO: Todos tienen name="color" */
+&lt;input type="radio" name="color" value="red"&gt;
+&lt;input type="radio" name="color" value="blue"&gt;
+/* Solo se puede seleccionar uno */
+
+/* INCORRECTO: Diferentes names */
+&lt;input type="radio" name="color1" value="red"&gt;
+&lt;input type="radio" name="color2" value="blue"&gt;
+/* Se pueden seleccionar ambos (¡no debería pasar!) */</code></pre>
+
+            <h4>3. Checkboxes: Envío de Datos</h4>
+            <pre><code>/* Si un checkbox NO está marcado, NO se envía */
+&lt;form method="POST"&gt;
+  &lt;input type="checkbox" name="terminos"&gt;
+  &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;
+
+/* Si se marca, se envía como: terminos=on
+   Si NO se marca, NO se envía en el POST */</code></pre>
+
+            <h4>4. Input Type vs Value</h4>
+            <pre><code>/* type define QUÉ es el campo */
+&lt;input type="number"&gt;    /* Solo acepta números */
+&lt;input type="email"&gt;     /* Valida formato email */
+
+/* value es el CONTENIDO inicial */
+&lt;input type="text" value="Hello"&gt;  /* Comienza con "Hello" */</code></pre>
+
+        </section>
+
+        <!-- Gráficos -->
+        <section id="graficos">
+            <h2>📊 5. Gráficos y Visualización de Datos</h2>
+
+            <p>Hay varias formas de crear gráficos en web. Las principales son:</p>
+
+            <h3>1. Canvas (Dibujo Programático)</h3>
+            <p>Canvas permite dibujar gráficos pixel por pixel usando JavaScript.</p>
+
+            <pre><code>&lt;canvas id="miCanvas" width="400" height="300"&gt;&lt;/canvas&gt;
+
+&lt;script&gt;
+  const canvas = document.getElementById('miCanvas');
+  const ctx = canvas.getContext('2d');
+  
+  /* Dibujar un rectángulo */
+  ctx.fillStyle = '#7ad1a2';
+  ctx.fillRect(50, 50, 200, 100);
+  
+  /* Dibujar un círculo */
+  ctx.beginPath();
+  ctx.arc(300, 150, 50, 0, Math.PI * 2);
+  ctx.fillStyle = '#ff6a00';
+  ctx.fill();
+  
+  /* Dibujar texto */
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '16px Arial';
+  ctx.fillText('Mi Gráfico', 10, 30);
+&lt;/script&gt;</code></pre>
+
+            <h4>Demo: Gráfico de Barras Simple</h4>
+            <div class="canvas-wrapper">
+                <canvas id="barChart" width="400" height="300"></canvas>
+            </div>
+
+            <h4>Demo: Gráfico Circular (Pie Chart)</h4>
+            <div class="canvas-wrapper">
+                <canvas id="pieChart" width="300" height="300"></canvas>
+            </div>
+
+            <h3>2. SVG (Gráficos Vectoriales)</h3>
+            <p>SVG es ideal para gráficos escalables que no pierden calidad.</p>
+
+            <pre><code>&lt;svg width="200" height="200" viewBox="0 0 200 200"&gt;
+  &lt;!-- Rectángulo --&gt;
+  &lt;rect x="20" y="20" width="100" height="60" fill="#7ad1a2" /&gt;
+  
+  &lt;!-- Círculo --&gt;
+  &lt;circle cx="150" cy="100" r="40" fill="#ff6a00" /&gt;
+  
+  &lt;!-- Línea --&gt;
+  &lt;line x1="10" y1="10" x2="190" y2="190" stroke="#fff" stroke-width="2" /&gt;
+  
+  &lt;!-- Texto --&gt;
+  &lt;text x="50" y="150" font-size="16" fill="#fff"&gt;SVG Gráfico&lt;/text&gt;
+&lt;/svg&gt;</code></pre>
+
+            <h4>Ventajas de SVG</h4>
+            <ul>
+                <li>Escalable sin pérdida de calidad</li>
+                <li>Se puede editar con CSS y JavaScript</li>
+                <li>Más accesible que Canvas (se puede usar con lectores de pantalla)</li>
+                <li>Ideal para iconos y gráficos geométricos</li>
+            </ul>
+
+            <h3>3. Chart.js (Biblioteca)</h3>
+            <p>Hay librerías que facilitan crear gráficos complejos:</p>
+
+            <pre><code>&lt;script src="https://cdn.jsdelivr.net/npm/chart.js"&gt;&lt;/script&gt;
+
+&lt;canvas id="myChart"&gt;&lt;/canvas&gt;
+
+&lt;script&gt;
+  const ctx = document.getElementById('myChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Enero', 'Febrero', 'Marzo'],
+      datasets: [{
+        label: 'Ventas',
+        data: [12, 19, 3],
+        backgroundColor: '#7ad1a2'
+      }]
+    }
+  });
+&lt;/script&gt;</code></pre>
+
+            <h3>4. CSS Puro (Simple Graphics)</h3>
+            <p>Para gráficos muy simples, CSS es suficiente:</p>
+
+            <pre><code>.bar {
+  width: 50%;
+  height: 20px;
+  background: linear-gradient(90deg, #7ad1a2, #4aa98f);
+  margin: 10px 0;
+}</code></pre>
+
+            <div class="demo-container" style="flex-direction: column; align-items: stretch; gap: 20px;">
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div style="background: linear-gradient(90deg, #7ad1a2, #4aa98f); height: 30px; width: 75%;"></div>
+                    <div style="color: var(--muted); font-size: 0.9em;">75%</div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div style="background: linear-gradient(90deg, #ff6a00, #ffaa40); height: 30px; width: 45%;"></div>
+                    <div style="color: var(--muted); font-size: 0.9em;">45%</div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div style="background: linear-gradient(90deg, #a8f7d7, #7ad1a2); height: 30px; width: 92%;"></div>
+                    <div style="color: var(--muted); font-size: 0.9em;">92%</div>
+                </div>
+            </div>
+
+        </section>
+
+                <!-- Material Extendido -->
+                <section id="material-extendido">
+                        <h2>🧪 6. Material Extendido (ZIP + Examen)</h2>
+
+                        <p>Se incorporan aqui los conceptos detectados en <code>Material/</code> y en los ZIP extraidos: <code>flexbox.zip</code>, <code>positions.zip</code>, <code>tareas.zip</code>, <code>cesar.zip</code>, <code>p3-youtubers.zip</code>, y los paquetes de <code>LM/Material_examen</code>.</p>
+
+                        <h3>6.1. Layout desde cero: block, inline e inline-block</h3>
+                        <p>En <code>Material/positions/positions</code> se comparan visualmente los modos de caja base. Esta distincion es crucial porque muchos errores de layout vienen de no saber en que flujo vive cada elemento.</p>
+                        <pre><code>/* Block: ocupa toda la linea */
+.box-block { display: block; width: 100%; }
+
+/* Inline: fluye con texto, width/height no aplican como esperas */
+.box-inline { display: inline; }
+
+/* Inline-block: fluye en linea, pero acepta width/height */
+.box-inline-block { display: inline-block; width: 220px; }</code></pre>
+
+                        <h3>6.2. Position completo: static, relative, absolute, fixed, sticky</h3>
+                        <p>Los ejemplos <code>absoluto.html</code>, <code>absolutoPadre.html</code>, <code>fijo.html</code> y <code>relativo.html</code> muestran la regla clave:</p>
+                        <div class="concept-box">
+                                <strong>Regla madre:</strong> un hijo <code>position: absolute</code> se posiciona respecto al ancestro mas cercano con <code>position</code> distinto de <code>static</code>. Si no existe, toma el viewport/documento como referencia.
+                        </div>
+                        <pre><code>.padre {
+    position: relative;
+}
+
+.hijo {
+    position: absolute;
+    top: 20px;
+    left: 500px;
+}</code></pre>
+
+                        <h3>6.3. Float avanzado: clear, colapso y BFC</h3>
+                        <p>En <code>floatLeftClear.html</code> se muestra el patron clasico de envolver texto con imagen flotante y limpiar despues.</p>
+                        <pre><code>.flota {
+    float: left;
+    margin-right: 1em;
+    margin-bottom: 1em;
+}
+
+.limpia {
+    clear: both;
+}</code></pre>
+                        <p>Tambien aparece la alternativa moderna para contener floats sin hacks:</p>
+                        <pre><code>.contenedor {
+    display: flow-root; /* crea un nuevo bloque de formato */
+}</code></pre>
+
+                        <h3>6.4. Flexbox microdetallado (material flexbox.zip)</h3>
+                        <p>Ademas de lo anterior, el material extra incluye demos especificas de <code>align-content</code>, <code>inline-flex</code>, <code>order</code>, <code>flex-basis</code>, <code>flex-shrink</code>, <code>flex-wrap</code> y animaciones por <code>transition</code>.</p>
+                        <pre><code>.container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start; /* controla lineas, no items individuales */
+    height: 60vh;              /* necesario para notar align-content */
+}
+
+.item-a { flex-basis: 200px; }
+.item-b { flex-shrink: 0; }
+.item-c { order: 30; }
+
+.animado {
+    transition: all 1s;
+}
+.animado:hover {
+    flex-basis: 400px;
+}</code></pre>
+
+                        <div class="warning-box">
+                                <strong>Matiz critico:</strong> <code>align-items</code> alinea items dentro de cada linea; <code>align-content</code> alinea el conjunto de lineas. Si no hay multiples lineas (<code>wrap</code>) o no hay espacio libre en eje cruzado, <code>align-content</code> parece "no funcionar".
+                        </div>
+
+                        <h3>6.5. Selectores, especificidad y pseudoselectores (material examen)</h3>
+                        <p>En <code>some_bullshit_pages/selectors.html</code> e <code>index.html</code> del material de examen se documentan tipos de selectores y jerarquia de especificidad.</p>
+                        <pre><code>/* Escala tipica de especificidad */
+/* inline (1000) > #id (100) > .class/[attr]/:pseudo-class (10) > element/::pseudo-element (1) */
+
+#unique .spec-demo__text { color: #0b84ff; }
+.spec-demo__text:hover { color: #ffb000; }
+div .spec-demo__text { color: #f8f8f8; }</code></pre>
+                        <p>Tambien se refuerza el uso de:</p>
+                        <ul>
+                                <li><code>[attr]</code> y <code>[attr="valor"]</code></li>
+                                <li>Combinadores: <code>div &gt; p</code>, <code>div p</code>, <code>h2 + p</code>, <code>h2 ~ p</code></li>
+                                <li>Pseudoclases: <code>:hover</code>, <code>:focus</code>, <code>:nth-child()</code></li>
+                                <li>Pseudoelementos: <code>::before</code>, <code>::after</code>, <code>::first-letter</code></li>
+                        </ul>
+
+                        <h3>6.6. Semantica + accesibilidad de estructura</h3>
+                        <p>Los archivos <code>structure.html</code> e <code>index.html</code> del material de examen insisten en landmarks semanticos y accesibilidad basica:</p>
+                        <ul>
+                                <li>Un unico <code>&lt;main&gt;</code> por pagina.</li>
+                                <li><code>header/nav/main/section/article/aside/footer</code> segun significado real, no por apariencia.</li>
+                                <li><code>aria-label</code> para contextos donde el significado visual no basta.</li>
+                                <li><code>alt</code> en imagenes informativas y <code>alt=""</code> en decorativas.</li>
+                        </ul>
+
+                        <h3>6.7. Formularios modernos + validacion nativa</h3>
+                        <p>En <code>tareas/index11.html</code> y ejemplos de examen aparecen formularios con atributos de validacion de navegador:</p>
+                        <pre><code>&lt;input type="text" minlength="1" maxlength="200" required&gt;
+&lt;input type="date" required&gt;
+&lt;select required&gt;...&lt;/select&gt;</code></pre>
+                        <p>El navegador valida estructura minima, pero la validacion real de seguridad debe repetirse en servidor.</p>
+
+                        <h3>6.8. JavaScript aplicado a HTML/CSS: DOM, eventos y estado</h3>
+                        <p>El material <code>tareas/js/tareas08.js</code>, <code>cesar/js/app.js</code> y <code>structure.js</code> añade la capa de comportamiento:</p>
+                        <pre><code>// Esperar a que el DOM exista
+document.addEventListener('DOMContentLoaded', () =&gt; {
+    const form = document.querySelector('#formTarea');
+
+    form.addEventListener('submit', (e) =&gt; {
+        e.preventDefault();
+        // leer datos, actualizar estado y repintar
+    });
+});</code></pre>
+                        <p>Patrones clave observados:</p>
+                        <ul>
+                                <li><strong>Estado en memoria:</strong> arrays de objetos (ej. tareas con id, prioridad, fecha, completada).</li>
+                                <li><strong>Renderizado:</strong> generar DOM/HTML desde estado y volver a pintar tras cada accion.</li>
+                                <li><strong>Delegacion de eventos:</strong> un solo listener en contenedor usando <code>data-id</code> y <code>data-action</code>.</li>
+                                <li><strong>Interaccion incremental:</strong> <code>input</code> event para sincronizar sliders en tiempo real.</li>
+                        </ul>
+
+                        <h3>6.9. Doctype y legado XHTML</h3>
+                        <p>En material heredado aparecen paginas con <code>XHTML 1.0 Transitional</code>. En practicas actuales, usa HTML5:</p>
+                        <pre><code>&lt;!DOCTYPE html&gt;</code></pre>
+                        <p>HTML5 simplifica sintaxis, mejora semantica y evita rigidez XML innecesaria para casos basicos de front-end.</p>
+
+                        <h3>6.10. Inventario de archivos extraidos y usados como referencia</h3>
+                        <ul>
+                                <li><code>Material/flexbox/flexbox/...</code>: laboratorio de propiedades flex.</li>
+                                <li><code>Material/positions/positions/...</code>: laboratorio de position, float, clear y overflow.</li>
+                                <li><code>Material/tareas/tareas/...</code>: formularios + JS DOM/events para CRUD basico.</li>
+                                <li><code>Material/cesar/cesar/...</code>: eventos de rango, actualizacion reactiva simple de UI.</li>
+                                <li><code>Material/LM/Material_examen/some_bullshit_pages/...</code>: guias extendidas de semantica, selectores, layout y forms.</li>
+                                <li><code>Material/p3-youtubers/Ej4/...</code>: estructura multipagina, menu, assets e identidad visual.</li>
+                        </ul>
+
+                        <h3>6.11. Material PDF y chuletas (contenido incorporado en esta guia)</h3>
+                        <p>En <code>Material/</code> y <code>Material/LM/Material_examen/examen/pdfs</code> hay colecciones de referencia rapida (HTML5, CSS3, Flexbox, JS, tablas/bordes/posicionamiento, enlaces, listas e imagenes, Git). Aunque su formato es de consulta, sus ejes ya quedan integrados aqui:</p>
+                        <ul>
+                            <li>HTML semantico, listas, tablas, enlaces, imagenes y formularios.</li>
+                            <li>CSS de layout (float/flex/grid/position), selectores y especificidad.</li>
+                            <li>Responsive design con media queries.</li>
+                            <li>Patrones JS de DOM y eventos para interactividad basica.</li>
+                        </ul>
+                </section>
+
+                <!-- Errores Sutiles -->
+                <section id="errores-sutiles">
+                        <h2>🕵️ 7. Errores Sutiles y Estructura</h2>
+
+                        <p>Esta seccion esta pensada para ejercicios de examen donde la solucion parece minima, pero exige comprension profunda de estructura HTML, cascada CSS y flujo de layout. Muchos de estos ejercicios se resuelven cambiando una sola etiqueta o una sola regla.</p>
+
+                        <h3>7.1. Metodo forense para depurar rapido</h3>
+                        <ol>
+                                <li>Verifica estructura base: <code>doctype</code>, <code>html</code>, <code>head</code>, <code>body</code>.</li>
+                                <li>Comprueba jerarquia de contenedores: wrappers, columnas, bloques principales.</li>
+                                <li>Inspecciona selectores que no aplican: clase mal escrita, id incorrecto, combinador equivocado.</li>
+                                <li>Revisa flujo de layout: block/inline/flex/grid/float y sus ejes.</li>
+                                <li>Analiza especificidad y orden en cascada antes de tocar <code>!important</code>.</li>
+                                <li>Solo despues corrige visualmente espaciados y colores.</li>
+                        </ol>
+
+                        <div class="warning-box">
+                                <strong>Regla de oro:</strong> si algo "se ve mal", primero asume un error estructural, no decorativo.
+                        </div>
+
+                        <h3>7.2. Caso clasico: formulario que debe quedar EXACTO</h3>
+                        <p>En estos ejercicios, la estructura manda. Un formulario puede romperse por detalles aparentemente pequenos:</p>
+                        <ul>
+                                <li>Un <code>label</code> sin <code>for</code> correcto.</li>
+                                <li>Un <code>input</code> fuera de su <code>fieldset</code>.</li>
+                                <li>Orden incorrecto de bloques (primero datos personales, luego opciones).</li>
+                                <li>Falta de <code>name</code> en radios (rompe exclusividad).</li>
+                        </ul>
+                        <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Datos personales&lt;/legend&gt;
+    &lt;label for="nombre"&gt;Nombre&lt;/label&gt;
+    &lt;input id="nombre" name="nombre" type="text" required&gt;
+&lt;/fieldset&gt;
+
+&lt;fieldset&gt;
+    &lt;legend&gt;Idioma&lt;/legend&gt;
+    &lt;input type="radio" id="ingles1" name="ingles" value="1"&gt;
+    &lt;label for="ingles1"&gt;Ingles nivel 1&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+
+                        <h3>7.3. Caso clasico: HTML pequeno + CSS enorme e ilegible</h3>
+                        <p>Cuando hay miles de lineas de CSS, un solo <code>div</code> faltante rompe toda la maqueta. El patron tipico:</p>
+                        <pre><code>&lt;div class="page"&gt;
+    &lt;div class="layout"&gt;
+        &lt;main class="content"&gt;...&lt;/main&gt;
+        &lt;aside class="sidebar"&gt;...&lt;/aside&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                        <p>Si falta <code>.layout</code>, los selectores como <code>.layout &gt; .content</code> o reglas flex/grid no aplican. Resultado: todo "parece" roto aunque el CSS este bien.</p>
+
+                        <h3>7.4. Caso clasico: lineas rojas entre items del menu</h3>
+                        <p>Objetivo: separadores rojos entre items sin linea al final.</p>
+                        <pre><code>.menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    padding: 0 12px;
+    border-right: 2px solid red;
+}
+
+.menu li:last-child {
+    border-right: none;
+}</code></pre>
+                        <p>Error sutil comun: aplicar el borde al <code>a</code> en vez del <code>li</code> y luego pelear con alturas/line-height.</p>
+
+                        <h3>7.5. Caso clasico: "el CSS rehace todo el HTML"</h3>
+                        <p>Un mismo HTML puede parecer totalmente distinto segun el modo de layout:</p>
+                        <ul>
+                                <li><strong>Normal flow:</strong> bloques uno debajo de otro.</li>
+                                <li><strong>Flex:</strong> distribucion en un eje, alineacion y reordenado visual.</li>
+                                <li><strong>Grid:</strong> malla 2D que puede cambiar orden visual y areas.</li>
+                                <li><strong>Position:</strong> elementos sacados de flujo para overlays y badges.</li>
+                        </ul>
+                        <pre><code>/* Mismo HTML, 3 versiones visuales */
+.wrapper.normal { display: block; }
+.wrapper.flex { display: flex; gap: 12px; }
+.wrapper.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }</code></pre>
+
+                        <h3>7.6. Errores sutiles de alto impacto (checklist de examen)</h3>
+                        <ul>
+                                <li><strong>Unidades olvidadas:</strong> <code>width: 100</code> en vez de <code>100px</code>.</li>
+                                <li><strong>Clase mal escrita:</strong> <code>.contenedor</code> vs <code>.container</code>.</li>
+                                <li><strong>Descendencia incorrecta:</strong> <code>.menu li a</code> no coincide con HTML real.</li>
+                                <li><strong>Radio sin name comun:</strong> se pueden marcar varios.</li>
+                                <li><strong>Altura 100% sin contexto:</strong> el padre no tiene altura definida.</li>
+                                <li><strong>Float sin clear:</strong> pie de pagina sube y se monta.</li>
+                                <li><strong>Overflow accidental:</strong> ancho fijo + padding + border sin <code>box-sizing: border-box</code>.</li>
+                                <li><strong>Especificidad bloqueando cambios:</strong> un selector con id pisa todo.</li>
+                                <li><strong>Cierre de etiqueta ausente:</strong> rompe el DOM y cascada posterior.</li>
+                        </ul>
+
+                        <h3>7.7. Estructura minima recomendada para tareas largas</h3>
+                        <pre><code>&lt;body&gt;
+    &lt;div class="page"&gt;
+        &lt;header class="site-header"&gt;...&lt;/header&gt;
+
+        &lt;nav class="site-nav"&gt;
+            &lt;ul class="menu"&gt;...&lt;/ul&gt;
+        &lt;/nav&gt;
+
+        &lt;main class="layout"&gt;
+            &lt;section class="content"&gt;...&lt;/section&gt;
+            &lt;aside class="sidebar"&gt;...&lt;/aside&gt;
+        &lt;/main&gt;
+
+        &lt;footer class="site-footer"&gt;...&lt;/footer&gt;
+    &lt;/div&gt;
+&lt;/body&gt;</code></pre>
+                        <p>Esta base evita el 80% de errores estructurales en practicas donde el CSS es pesado.</p>
+
+                        <h3>7.8. Estrategia de practica (para ejercicios de horas)</h3>
+                        <ol>
+                                <li>Replica estructura HTML sin estilo hasta que el orden semantico sea correcto.</li>
+                                <li>Activa layout principal (flex o grid) antes de colores y tipografia.</li>
+                                <li>Resuelve cada bug con una hipotesis: "esta regla no aplica por X".</li>
+                                <li>Valida estados: hover, focus, mobile y contenido largo.</li>
+                                <li>Al final, limpia selectores redundantes y baja especificidad.</li>
+                        </ol>
+
+                                                <h3>7.9. Mini Exam Lab (5 bugs sutiles)</h3>
+                                                <p>Intenta resolver cada caso sin ver la solucion. Luego abre el bloque de respuesta y compara tu razonamiento.</p>
+
+                                                <h4>Lab 1: menu con separadores rojos</h4>
+                                                <pre><code>/* BUG */
+.menu a {
+    border-right: 2px solid red;
+    padding: 0 12px;
+}
+
+/* Resultado: separadores desalineados y dificil quitar el ultimo */</code></pre>
+                                                <details>
+                                                        <summary>Ver solucion</summary>
+                                                        <pre><code>.menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    border-right: 2px solid red;
+    padding: 0 12px;
+}
+
+.menu li:last-child {
+    border-right: none;
+}</code></pre>
+                                                        <p>El separador debe vivir en <code>li</code>, que representa cada item estructural.</p>
+                                                </details>
+
+                                                <h4>Lab 2: formulario que "no valida bien"</h4>
+                                                <pre><code>&lt;label&gt;Email&lt;/label&gt;
+&lt;input id="correo" type="email"&gt;
+
+&lt;input type="radio" name="ingles1" value="1"&gt;
+&lt;input type="radio" name="ingles2" value="2"&gt;</code></pre>
+                                                <details>
+                                                        <summary>Ver solucion</summary>
+                                                        <pre><code>&lt;label for="correo"&gt;Email&lt;/label&gt;
+&lt;input id="correo" name="correo" type="email" required&gt;
+
+&lt;input type="radio" name="ingles" value="1"&gt;
+&lt;input type="radio" name="ingles" value="2"&gt;</code></pre>
+                                                        <p>El <code>for</code> conecta label-input y los radios deben compartir <code>name</code> para exclusividad.</p>
+                                                </details>
+
+                                                <h4>Lab 3: un div faltante rompe toda la maqueta</h4>
+                                                <pre><code>&lt;div class="page"&gt;
+    &lt;main class="content"&gt;...&lt;/main&gt;
+    &lt;aside class="sidebar"&gt;...&lt;/aside&gt;
+&lt;/div&gt;
+
+/* CSS esperado */
+.layout { display: flex; }
+.layout &gt; .content { flex: 1; }</code></pre>
+                                                <details>
+                                                        <summary>Ver solucion</summary>
+                                                        <pre><code>&lt;div class="page"&gt;
+    &lt;div class="layout"&gt;
+        &lt;main class="content"&gt;...&lt;/main&gt;
+        &lt;aside class="sidebar"&gt;...&lt;/aside&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                                                        <p>Faltaba el contenedor <code>.layout</code>, por eso los selectores y el flex no se aplicaban.</p>
+                                                </details>
+
+                                                <h4>Lab 4: absolute fuera de sitio</h4>
+                                                <pre><code>.badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+}</code></pre>
+                                                <details>
+                                                        <summary>Ver solucion</summary>
+                                                        <pre><code>.card {
+    position: relative;
+}
+
+.badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+}</code></pre>
+                                                        <p>Sin padre posicionado, <code>absolute</code> toma como referencia el viewport o ancestro incorrecto.</p>
+                                                </details>
+
+                                                <h4>Lab 5: overflow fantasma en columnas 50/50</h4>
+                                                <pre><code>.col {
+    width: 50%;
+    padding: 16px;
+    border: 1px solid #000;
+    float: left;
+}</code></pre>
+                                                <details>
+                                                        <summary>Ver solucion</summary>
+                                                        <pre><code>* {
+    box-sizing: border-box;
+}
+
+.col {
+    width: 50%;
+    padding: 16px;
+    border: 1px solid #000;
+    float: left;
+}</code></pre>
+                                                        <p>Sin <code>border-box</code>, padding y border se suman al 50% y causan desborde.</p>
+                                                </details>
+
+                                                                                                <h3>7.10. Hard Mode Lab (5 trampas de examen)</h3>
+                                                                                                <p>Estos casos son mas traicioneros: el bug suele estar en especificidad, contexto de apilamiento, o en reglas que parecen correctas pero no aplican por estructura.</p>
+
+                                                                                                <h4>Hard 1: guerra de especificidad</h4>
+                                                                                                <pre><code>/* BUG: no cambia color aunque editas .btn */
+.btn { color: white; }
+#panel .toolbar .btn { color: yellow; }
+
+/* HTML real */
+&lt;div id="panel"&gt;
+    &lt;div class="toolbar"&gt;
+        &lt;a class="btn" style="color: red"&gt;Click&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                                                                                                <details>
+                                                                                                                <summary>Ver solucion</summary>
+                                                                                                                <pre><code>/* Quita el inline style del HTML (preferido) */
+&lt;a class="btn"&gt;Click&lt;/a&gt;
+
+/* o define una regla de estado/control sin depender de inline */
+#panel .toolbar .btn { color: yellow; }</code></pre>
+                                                                                                                <p>La trampa es el <code>style="..."</code> inline (especificidad superior). No era un problema de la clase base.</p>
+                                                                                                </details>
+
+                                                                                                <h4>Hard 2: pseudo-selector en elemento equivocado</h4>
+                                                                                                <pre><code>/* BUG: la raya roja sale mal o no sale */
+.menu a:not(:last-child) {
+    border-right: 2px solid red;
+}</code></pre>
+                                                                                                <details>
+                                                                                                                <summary>Ver solucion</summary>
+                                                                                                                <pre><code>.menu li:not(:last-child) {
+    border-right: 2px solid red;
+}
+
+.menu li a {
+    display: block;
+    padding: 0 12px;
+}</code></pre>
+                                                                                                                <p><code>:last-child</code> debe evaluarse sobre los <code>li</code>, no sobre los <code>a</code> internos.</p>
+                                                                                                </details>
+
+                                                                                                <h4>Hard 3: clearfix correcto pero contenedor sigue roto</h4>
+                                                                                                <pre><code>.wrapper::after {
+    content: "";
+    clear: both;
+}
+
+.col { float: left; width: 50%; }</code></pre>
+                                                                                                <details>
+                                                                                                                <summary>Ver solucion</summary>
+                                                                                                                <pre><code>.wrapper::after {
+    content: "";
+    display: table; /* o display:block */
+    clear: both;
+}</code></pre>
+                                                                                                                <p>Sin <code>display</code>, el pseudo-elemento puede no participar como esperas y el clear no hace efecto util.</p>
+                                                                                                </details>
+
+                                                                                                <h4>Hard 4: media query "correcta" que nunca dispara</h4>
+                                                                                                <pre><code>/* BUG */
+@media (max-width: 768) {
+    .layout { grid-template-columns: 1fr; }
+}</code></pre>
+                                                                                                <details>
+                                                                                                                <summary>Ver solucion</summary>
+                                                                                                                <pre><code>@media (max-width: 768px) {
+    .layout { grid-template-columns: 1fr; }
+}</code></pre>
+                                                                                                                <p>Faltaba la unidad <code>px</code>. Es un error minimo que invalida la condicion.</p>
+                                                                                                </details>
+
+                                                                                                <h4>Hard 5: z-index no funciona (stacking context)</h4>
+                                                                                                <pre><code>.modal {
+    z-index: 9999;
+}
+
+.card {
+    transform: translateZ(0);
+}</code></pre>
+                                                                                                <details>
+                                                                                                                <summary>Ver solucion</summary>
+                                                                                                                <pre><code>.modal {
+    position: fixed; /* o absolute/relative segun caso */
+    z-index: 9999;
+}
+
+/* Evitar stacking contexts innecesarios en ancestros */
+.card {
+    transform: none;
+}</code></pre>
+                                                                                                                <p><code>z-index</code> solo opera en elementos posicionados y puede quedar encerrado por contextos de apilamiento creados por <code>transform</code>, <code>opacity</code>, etc.</p>
+                                                                                                </details>
+                </section>
+
+        <!-- Referencias -->
+        <section id="referencias">
+                                                <h2>🔗 8. Referencias a Tus Proyectos</h2>
+
+            <h3>index.html (Principal)</h3>
+            <p>Tu página principal usa:</p>
+            <ul>
+                <li><strong>Flexbox:</strong> <code>display: flex</code>, <code>align-items: center</code>, <code>justify-content: center</code> para centrar el contenido</li>
+                <li><strong>Grid:</strong> <code>grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))</code> para la galería de prácticas</li>
+                <li><strong>Gradientes:</strong> <code>linear-gradient</code> para fondos atractivos</li>
+                <li><strong>Glassmorphism:</strong> <code>backdrop-filter: blur(8px)</code> para el efecto de cristal</li>
+            </ul>
+
+            <h3>Practica 3 - 5 Páginas</h3>
+            <p>En <code>Pr_3/5_paginas/css/estilos.css</code>:</p>
+            <ul>
+                <li><strong>Flexbox:</strong> <code>.container { display: flex; }</code> para maquetación</li>
+                <li>Navegación con flex para distribuir items</li>
+            </ul>
+
+            <h3>Practica 5.1 - Float</h3>
+            <p>En <code>practica5.1/css/estilos.css</code>:</p>
+            <ul>
+                <li><strong>Float Left:</strong> <code>#imageLeft { float: left; }</code> para imágenes a la izquierda</li>
+                <li><strong>Float Right:</strong> <code>#imageRight { float: right; }</code> para imágenes a la derecha</li>
+                <li>Ancho proporcional con <code>width: %</code></li>
+            </ul>
+
+            <h3>Practica Formulario</h3>
+            <p>En <code>Practica_formulario/formulario.html</code>:</p>
+            <ul>
+                <li><strong>Form Element:</strong> Contenedor principal con <code>&lt;form action=""&gt;</code></li>
+                <li><strong>Fieldset:</strong> Grupos de campos con <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code></li>
+                <li><strong>Input Types:</strong> text, textarea, radio, checkbox, select</li>
+                <li><strong>Radio Buttons:</strong> Para idiomas (Inglés, Francés, Alemán) con levels 1-5</li>
+                <li><strong>Checkboxes:</strong> Para programas (Writer, Calc, Base, Impres)</li>
+                <li><strong>Select:</strong> Para Sistema Operativo (Linux, Windows, MacOS)</li>
+                <li><strong>Reset Button:</strong> <code>&lt;input type="reset"&gt;</code></li>
+            </ul>
+
+            <h3>Practica Images (CSS Extra)</h3>
+            <p>En <code>images/css/style.css</code>:</p>
+            <ul>
+                <li><strong>Float Layout:</strong> <code>.content { float: left; width: 88%; }</code></li>
+                <li><strong>Float Sidebar:</strong> <code>.sidebar { float: right; width: 10%; }</code></li>
+                <li>Layout de dos columnas sin flexbox ni grid</li>
+            </ul>
+
+            <h3>Practicas Tattoo (referencia de tecnicas usadas)</h3>
+            <p>En <code>Practicas/images/index.html</code> y <code>Practicas/images/css/style.css</code> (version funcional del layout tattoo):</p>
+            <ul>
+                <li><strong>Menu superior fijo:</strong> <code>#menu { position: fixed; top: 0; width: 100%; }</code></li>
+                <li><strong>Footer fijo:</strong> <code>.footer { position: fixed; bottom: 0; }</code></li>
+                <li><strong>Layout principal con floats:</strong> contenido + sidebar en porcentajes.</li>
+                <li><strong>Bloques de texto con imagen flotada:</strong> <code>.image-right .image { float: right; }</code> y <code>.image-left .image { float: left; }</code></li>
+                <li><strong>Clearfix con pseudo-elemento:</strong> <code>.text-block::after { content: ""; clear: both; }</code></li>
+                <li><strong>Scroll interno de texto:</strong> <code>.text { overflow-y: auto; }</code> para mantener altura fija del bloque.</li>
+                <li><strong>Responsive fallback:</strong> en <code>@media (max-width: 700px)</code> se desactivan floats y se pasa a ancho completo.</li>
+            </ul>
+            <p>Tambien existe <code>Practicas/practica5.2/practica5.2/index.html</code> con contenido tattoo y estructura de menu/header/main/submenu/footer, util como referencia de estructura semantica aunque su CSS no este presente en esa carpeta.</p>
+
+        </section>
+
+        <!-- Conclusión -->
+        <section>
+            <h2>🎓 Resumen Final</h2>
+
+            <h3>¿Cuándo usar cada técnica?</h3>
+            <table style="width: 100%; border-collapse: collapse; margin: 12px 0;">
+                <tr style="background: rgba(122, 209, 162, 0.1);">
+                    <td style="padding: 8px; border: 1px solid rgba(122, 209, 162, 0.3);"><strong>Flexbox</strong></td>
+                    <td style="padding: 8px; border: 1px solid rgba(122, 209, 162, 0.3);">Layouts modernos, barras de navegación, centrado, distribución de items</td>
+                </tr>
+                <tr style="background: rgba(255, 106, 0, 0.05);">
+                    <td style="padding: 8px; border: 1px solid rgba(255, 106, 0, 0.2);"><strong>Grid</strong></td>
+                    <td style="padding: 8px; border: 1px solid rgba(255, 106, 0, 0.2);">Layouts complejos de dos dimensiones, galerías, dashboards</td>
+                </tr>
+                <tr style="background: rgba(122, 209, 162, 0.1);">
+                    <td style="padding: 8px; border: 1px solid rgba(122, 209, 162, 0.3);"><strong>Float</strong></td>
+                    <td style="padding: 8px; border: 1px solid rgba(122, 209, 162, 0.3);">Envolver texto alrededor de imágenes, código heredado</td>
+                </tr>
+            </table>
+
+            <h3>Buenas Prácticas</h3>
+            <ul>
+                <li>✅ Usa flexbox para layouts lineales y modernos</li>
+                <li>✅ Usa grid para layouts bidimensionales complejos</li>
+                <li>✅ Evita float para layouts principales (usa flexbox/grid)</li>
+                <li>✅ Siempre usa <code>box-sizing: border-box</code> en todos los elementos</li>
+                <li>✅ Semantiza tu HTML con etiquetas apropiadas (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, etc.)</li>
+                <li>✅ Usa formularios nativos de HTML, no divs personalizados</li>
+                <li>✅ Valida inputs en el servidor, no solo en el cliente</li>
+                <li>✅ Usa Canvas para gráficos dinámicos, SVG para estáticos</li>
+            </ul>
+
+            <div class="concept-box">
+                <strong>👨‍💻 Próximos Pasos:</strong> Combina estas técnicas con JavaScript para crear aplicaciones web interactivas. Experimenta con los ejemplos de esta guía y adáptalos a tus proyectos.
+            </div>
+
+        </section>
+
+    </div>
+
+    <div class="back-to-top" id="backToTop">↑</div>
+
+    <footer>
+        <p>© 2024 Guía Completa de Desarrollo Web — Created for Learning</p>
+        <p><a href="../../index.html" style="color: var(--primary); text-decoration: none;">← Volver a PracticasHub</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
